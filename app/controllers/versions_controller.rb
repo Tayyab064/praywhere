@@ -1,5 +1,5 @@
 class VersionsController < ApplicationController
-  before_action :set_version, only: [:show, :edit, :update, :destroy ,:creport , :voteup]
+  before_action :set_version, only: [:show, :edit, :update ,:creport , :voteup]
   before_action :authenticate_user!, except: [:index , :show]
 
   # GET /versions
@@ -128,6 +128,7 @@ class VersionsController < ApplicationController
   # DELETE /versions/1
   # DELETE /versions/1.json
   def destroy
+    @version = @current_user.versions.find(params[:id])
     @version.destroy
     respond_to do |format|
       format.html { redirect_to versions_url, notice: 'Version was successfully destroyed.' }
