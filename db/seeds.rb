@@ -13,8 +13,7 @@ counti = 0
 
 data.each do |my_d|
 	if my_d['post_type'] == 'attachment' || my_d['post_type'] == 'revision'
-		user = User.create(email: "muhammad.tayyabmukhtar@yahoo.com" , password: "123456789")
-		room = Room.create(user_id: user.id)
+		room = Room.create(user_id: 1)
 		version = Version.create(name: my_d['post_title'], street: "", floor: "", city: "", country: "", description: my_d['post_content'] , direction: "", room_id: room.id, status: 1, typ: 0 )
 		photo = Photo.create(photo_url: my_d['guid'] , cloud: false , version_id: version.id)
 		counti += 1
