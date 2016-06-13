@@ -70,7 +70,7 @@
                       <a href="#">bookmark</a>
                     </div>
                       <h2><strong>Location Address:</strong><%= @version.street %> <%= @version.city %>, <%= @version.country %></h2>
-                        <p><%= @version.name %>, level <%= @version.floor %> at <%= @version.name %> (<%= @version.direction %>)<br><%= @version.description %>
+                        <p><%= @version.name %>, level <%= @version.floor %> at <%= @version.name %> (<%= @version.direction %>)<br><%= strip_tags(@version.description) %>
                         </p>
                         <span class="checkin">Check In<span class="dotes">: </span><span><%= @version.room.checkins.count %></span></span>
                         <span class="post">Date Posted<span class="dotes">:</span><span><%= @version.created_at.strftime("%d-%m-%Y") %></span></span> 
@@ -153,16 +153,17 @@ vote this up to replace the other one</p>
                           <% if @version.link.include? "watch?v=" %>
                             <% url =  @version.link.split('watch?v=', @version.link.length) %>
                             <% p source = "https://www.youtube.com/embed/"+url[1]+"?rel=0" %>
+                            <iframe width="420px" height="227px" src="<%= source %>" allowfullscreen></iframe>
                           <% else %>
-                            <% source =  "https://www.youtube.com/embed/" %>
+                            <%= image_tag("image_not.png", height: '227px' , width: '420px' , :alt => "Not Available") %>
                           <% end %>
                         <% else %>
-                          <% source =  "https://www.youtube.com/embed/" %>
+                          <%= image_tag("image_not.png", height: '227px' , width: '420px', :alt => "Not Available") %>
                         <% end %>
-                        <iframe width="420px" height="227px" src="<%= source %>" allowfullscreen></iframe>
+                        
                       </div>
                       <div id="report" class="tab-pane fade">
-                        <h4>Prayer area no longer exist? Help us update this entry</h4>
+                        <h4 style="color: #009ce2">Prayer area no longer exists? <strong style="color: #f29100">Help Us</strong> update this entry</h4>
                         <%= form_tag( action: "creport") do%>
                           <%= radio_button_tag(:status, "0") %>
                           <%= label_tag(:status_child, "Prayer room no longer exist") %><br>
@@ -183,7 +184,11 @@ vote this up to replace the other one</p>
             <div class="col-md-4">
                 <div class="galary">
                     <% if @version.photos.first.present? %>
-                      <img src="<%= @version.photos.first.image_url %>" width="334" height="253" >
+                      <% if @version.photos.first.cloud %>
+                        <img src="<%= @version.photos.first.image_url %>" width="334" height="253" > 
+                      <% else %>
+                        <img src="<%= @version.photos.first.photo_url %>" width="334" height="253" >
+                      <% end %>
                     <% else %>
                       <%= image_tag("img10.jpg", height: '253', width: '334' , :alt => "ICON") %>
                     <% end %>
@@ -192,7 +197,11 @@ vote this up to replace the other one</p>
           <div class="col-md-4">
               <div class="galary">
                   <% if @version.photos.second.present? %>
-                    <img src="<%= @version.photos.second.image_url %>" width="334" height="253">
+                      <% if @version.photos.second.cloud %>
+                        <img src="<%= @version.photos.second.image_url %>" width="334" height="253" > 
+                      <% else %>
+                        <img src="<%= @version.photos.second.photo_url %>" width="334" height="253" >
+                      <% end %>
                   <% else %>
                     <%= image_tag("img11.jpg", height: '253', width: '334' , :alt => "ICON") %>
                   <% end %>
@@ -201,7 +210,11 @@ vote this up to replace the other one</p>
           <div class="col-md-4">
               <div class="galary">
                   <% if @version.photos.third.present? %>
-                    <img src="<%= @version.photos.third.image_url %>" width="334" height="253">
+                    <% if @version.photos.third.cloud %>
+                      <img src="<%= @version.photos.third.image_url %>" width="334" height="253" > 
+                    <% else %>
+                      <img src="<%= @version.photos.third.photo_url %>" width="334" height="253" >
+                    <% end %>
                   <% else %>
                     <%= image_tag("img12.jpg", height: '253', width: '334' , :alt => "ICON") %>
                   <% end %>

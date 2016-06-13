@@ -12,18 +12,53 @@ data = JSON.parse(file)
 counti = 0
 
 data.each do |my_d|
-	if my_d['post_type'] == 'attachment' || my_d['post_type'] == 'revision'
+	if my_d['post_type'].present?
 		room = Room.create(user_id: 1)
-		version = Version.create(name: my_d['post_title'], street: "", floor: "", city: "", country: "", description: my_d['post_content'] , direction: "", room_id: room.id, status: 1, typ: 0 )
-		photo = Photo.create(photo_url: my_d['guid'] , cloud: false , version_id: version.id)
+		post_content = ActionController::Base.helpers.strip_tags(my_d['post_content'])
+		version = Version.create(name: my_d['post_title'], street: "", floor: "", city: "Singapore", country: "Singapore", description: post_content , direction: "Please refer to the description", room_id: room.id, status: 1, typ: 0 )
+		regex_an = "<a\shref=[^>]*[>]"
+		regex_hre = 'http[^"]*'
+		mat = my_d['post_content'].scan(/<a\shref=[^>]*[>]/)
+		if mat.count < 1
+			photoo = Photo.create(photo_url: my_d['guid'] , cloud: false , version_id: version.id)
+		else
+			mat.each do |im|
+				ms = im.match(regex_hre)
+				photoo = Photo.create(photo_url: ms , cloud: false , version_id: version.id)		
+			end
+			p "Bingoo"
+		end
+
 		counti += 1
 		data.each do |second_lop|
 			if second_lop['post_parent'] == my_d['ID']
-				versioni = Version.create(name: second_lop['post_title'], street: "", floor: "", city: "", country: "", description: second_lop['post_content'] , direction: "", room_id: room.id, status: 1, typ: 1 )
-				photoo = Photo.create(photo_url: second_lop['guid'] , cloud: false , version_id: versioni.id)
+				post_contenti = ActionController::Base.helpers.strip_tags(second_lop['post_content'])
+				versioni = Version.create(name: second_lop['post_title'], street: "", floor: "", city: "Singapore", country: "Singapore", description: post_contenti , direction: "Please refer to the description", room_id: room.id, status: 1, typ: 1 )
+				
+				mat_s = second_lop['post_content'].scan(/<a\shref=[^>]*[>]/)
+				if mat_s.count < 1
+					photoo = Photo.create(photo_url: second_lop['guid'] , cloud: false , version_id: versioni.id)
+				else
+					mat_s.each do |imk|
+						mas = imk.match(regex_hre)
+						photoo = Photo.create(photo_url: mas , cloud: false , version_id: versioni.id)		
+					end
+					p "Bingoo"
+				end
+				#photoo = Photo.create(photo_url: second_lop['guid'] , cloud: false , version_id: versioni.id)
 				counti += 1
+
+				descri = second_lop['post_content'].gsub(regex_an,"")
+				descri = second_lop['post_content'].gsub(regex_hre,"")
+
+				versioni.update(description: descri)
 			end
 		end
+
+		descrip = my_d['post_content'].gsub(regex_an,"")
+		descrip = my_d['post_content'].gsub(regex_hre,"")
+
+		version.update(description: descrip)
 	end
 end
 p counti

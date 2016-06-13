@@ -22,7 +22,11 @@
     <div class="img-box col-md-3 col-sm-6 col-xs-6"> 
       <% if Version.better.decending.first.present? %>
         <% firstB = Version.better.decending.first %>
-        <img src="<%= firstB.photos.first.image_url %>" width="234" height="232" alt="image descraption"> 
+        <% if firstB.photos.first.cloud %>
+          <img src="<%= firstB.photos.first.image_url %>" width="234" height="232" alt="image descraption"> 
+        <% else %>
+          <img src="<%= firstB.photos.first.photo_url %>" width="234" height="232" alt="image descraption"> 
+        <% end %>
         <p><%= firstB.name %></p>
       <% else %>
         <img src="images/img04.jpg" width="234" height="232" alt="image descraption"> 
@@ -32,7 +36,11 @@
     <div class="img-box col-md-3 col-sm-6 col-xs-6"> 
       <% if Version.better.decending.second.present? %>
         <% firstB = Version.better.decending.second %>
-        <img src="<%= firstB.photos.first.image_url %>" width="234" height="232" alt="image descraption"> 
+        <% if firstB.photos.first.cloud %>
+          <img src="<%= firstB.photos.first.image_url %>" width="234" height="232" alt="image descraption"> 
+        <% else %>
+          <img src="<%= firstB.photos.first.photo_url %>" width="234" height="232" alt="image descraption"> 
+        <% end %>
         <p><%= firstB.name %></p>
       <% else %>
         <img src="images/img03.jpg" width="234" height="232" alt="image descraption">
@@ -42,7 +50,11 @@
     <div class="img-box col-md-3 col-sm-6 col-xs-6"> 
       <% if Version.better.decending.third.present? %>
         <% firstB = Version.better.decending.third %>
-        <img src="<%= firstB.photos.first.image_url %>" width="234" height="232" alt="image descraption"> 
+        <% if firstB.photos.first.cloud %>
+          <img src="<%= firstB.photos.first.image_url %>" width="234" height="232" alt="image descraption"> 
+        <% else %>
+          <img src="<%= firstB.photos.first.photo_url %>" width="234" height="232" alt="image descraption"> 
+        <% end %>
         <p><%= firstB.name %></p>
       <% else %>
         <img src="images/img02.jpg" width="234" height="232" alt="image descraption"> 
@@ -52,7 +64,11 @@
     <div class="img-box col-md-3 col-sm-6 col-xs-6"> 
       <% if Version.better.decending.fourth.present? %>
         <% firstB = Version.better.decending.fourth %>
-        <img src="<%= firstB.photos.first.image_url %>" width="234" height="232" alt="image descraption"> 
+        <% if firstB.photos.first.cloud %>
+          <img src="<%= firstB.photos.first.image_url %>" width="234" height="232" alt="image descraption"> 
+        <% else %>
+          <img src="<%= firstB.photos.first.photo_url %>" width="234" height="232" alt="image descraption"> 
+        <% end %>
         <p><%= firstB.name %></p>
       <% else %>
         <img src="images/img05.jpg" width="234" height="232" alt="image descraption">  
@@ -61,7 +77,18 @@
     </div>
     </div>
     </section>
-    <strong id="result">Search Result <%= @versions.present? ? @versions.count : "0" %> Rooms</strong> 
+    <% if @scrol == 'yes' %>
+      <% if @versions.count < 1 %>
+        <div id="result" class="has-error">
+          <p><span class="glyphicon glyphicon-search" style="font-size:28px; color:#fff; margin-right: 10px"></span> Oops.. We can't find : <%= @para %>. Please, try to search again with different keywords</p>
+        </div>
+      <% else %>
+        <div id="result" class="has-success">
+          <p><span class="glyphicon glyphicon-search" style="font-size:28px; color:#fff; margin-right: 10px"></span> Displaying your search about: <%= @para %>.</p>
+        </div>
+      <% end %>
+    <% end %>
+    <!-- <strong id="result">Search Result <%= @versions.present? ? @versions.count : "0" %> Rooms</strong>  -->
 </div>
 <div class="container">
   <% if @versions.present? %>
@@ -71,9 +98,9 @@
         <div class="col-md-4 col-sm-6 col-xs-12">
           <div class="photo"> 
           <% if version.photos.first.cloud == false%>
-          <img src="<%= version.photos.first.photo_url %>" width="305" height="263" alt="image descration">
+            <img src="<%= version.photos.first.photo_url %>" width="305" height="263" alt="image descration">
           <% else %>
-          <img src="<%= version.photos.first.image_url %>" width="305" height="263" alt="image descration">
+            <img src="<%= version.photos.first.image_url %>" width="305" height="263" alt="image descration">
           <% end %>
           </div>
         </div>
@@ -81,7 +108,7 @@
           <div class="item-detail">
             <h1><%= version.name %></h1>
             <h2><strong>Location Adderss:</strong> <%= version.street %>, level <%= version.floor %></h2>
-            <p><%= version.description %></p>
+            <p><%= strip_tags(version.description) %></p>
             <span class="checkin">Check In<span class="dotes">:</span><span><%= version.room.checkins.count %></span></span>
             <span class="post">Date Posted<span class="dotes">:</span><span><%= version.created_at.strftime("%d-%m-%Y") %></span></span> 
             <span class="status">Status<span class="dotes">:</span><span><%= version.reports.count<5 ? "Available" : "Unavailable"  %></span></span>

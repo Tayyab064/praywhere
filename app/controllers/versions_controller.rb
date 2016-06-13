@@ -15,9 +15,19 @@ class VersionsController < ApplicationController
     @scrol = 'no'
     if params[:name].present? || params[:city].present? || params[:country].present?
       @scrol = 'yes'
-      @versions = @versions.where(name: params[:name]) if params[:name]!=""
-      @versions = @versions.where(city: params[:city]) if params[:city]!=""
-      @versions = @versions.where(country: params[:country]) if params[:country]!=""
+      @para = ""
+      if params[:name]!=""
+        @para = @para + params[:name] + " "
+      end
+      if params[:city]!=""
+        @para = @para + params[:city] + " "
+      end
+      if params[:country]!=""
+        @para = @para + params[:country] + " "
+      end
+      @versions = @versions.where("name ~* ?" , params[:name]) if params[:name]!=""
+      @versions = @versions.where("city ~* ?" , params[:city]) if params[:city]!=""
+      @versions = @versions.where("country ~* ?" , params[:country]) if params[:country]!=""
     end
     p @scrol
   end

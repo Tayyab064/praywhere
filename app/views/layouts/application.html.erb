@@ -95,11 +95,15 @@
             <% if Room.last.present? %>
 	            <% if Room.last.versions.first.present? %>
 	            	<% @roomL = Room.last.versions.first %>
-		            <div class="photo"> 
-		            	<img src="<%= @roomL.photos.first.image_url %>" width="91" height="79" alt="image descraption"> 
+		            <div class="photo">  
+                  <% if @roomL.photos.first.cloud %>
+                    <img src="<%= @roomL.photos.first.image_url %>" width="91" height="79" alt="image descraption">
+                  <% else %>
+                    <img src="<%= @roomL.photos.first.photo_url %>" width="91" height="79" alt="image descraption">
+                  <% end %>
 		            </div>
 		            <div class="item-list">
-		              <h3><%= @roomL.name %></h3>
+		              <h3 style="overflow: hidden" class="text-flow-name"><%= @roomL.name %></h3>
 		              <p>Location Address: <%= @roomL.street%>, Level <%= @roomL.floor%></p>
 		            </div>
 	            <% end %>
@@ -110,10 +114,14 @@
           	<% if Room.decending.third.versions.first.present? %>
             	<% @roomL = Room.decending.third.versions.first %>
 	            <div class="photo"> 
-	            	<img src="<%= @roomL.photos.first.image_url %>" width="91" height="79" alt="image descraption"> 
+	            	<% if @roomL.photos.first.cloud %>
+                  <img src="<%= @roomL.photos.first.image_url %>" width="91" height="79" alt="image descraption">
+                <% else %>
+                  <img src="<%= @roomL.photos.first.photo_url %>" width="91" height="79" alt="image descraption">
+                <% end %> 
 	            </div>
 	            <div class="item-list">
-	              <h3><%= @roomL.name %></h3>
+	              <h3 style="overflow: hidden" class="text-flow-name"><%= @roomL.name %></h3>
 	              <p>Location Address: <%= @roomL.street%>, Level <%= @roomL.floor%></p>
 	            </div>
 	        <% end %>
@@ -126,10 +134,14 @@
           	<% if Room.decending.second.versions.first.present? %>
             	<% @roomL = Room.decending.second.versions.first %>
 	            <div class="photo"> 
-	            	<img src="<%= @roomL.photos.first.image_url %>" width="91" height="79" alt="image descraption">
+	            	<% if @roomL.photos.first.cloud %>
+                  <img src="<%= @roomL.photos.first.image_url %>" width="91" height="79" alt="image descraption">
+                <% else %>
+                  <img src="<%= @roomL.photos.first.photo_url %>" width="91" height="79" alt="image descraption">
+                <% end %> 
 	            </div>
 	            <div class="item-list">
-	              <h3><%= @roomL.name %></h3>
+	              <h3 style="overflow: hidden" class="text-flow-name"><%= @roomL.name %></h3>
 	              <p>Location Address: <%= @roomL.street%>, Level <%= @roomL.floor%></p>
 	            </div>
 	        <% end %>
@@ -140,10 +152,14 @@
           	<% if Room.decending.fourth.versions.first.present? %>
             	<% @roomL = Room.decending.fourth.versions.first %>
 	            <div class="photo"> 
-	            	<img src="<%= @roomL.photos.first.image_url %>" width="91" height="79" alt="image descraption"> 
+	            	<% if @roomL.photos.first.cloud %>
+                  <img src="<%= @roomL.photos.first.image_url %>" width="91" height="79" alt="image descraption">
+                <% else %>
+                  <img src="<%= @roomL.photos.first.photo_url %>" width="91" height="79" alt="image descraption">
+                <% end %> 
 	            </div>
 	            <div class="item-list">
-	              <h3><%= @roomL.name %></h3>
+	              <h3 style="overflow: hidden" class="text-flow-name"><%= @roomL.name %></h3>
 	              <p>Location Address: <%= @roomL.street%>, Level <%= @roomL.floor%></p>
 	            </div>
 	        <% end %>
