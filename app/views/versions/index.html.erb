@@ -1,4 +1,6 @@
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <div class="header-main"> 
     <div class="container">
       <div class="search-box"> <span>Finding A</span> <strong>Prayer Place</strong> <span>Made Simple</span>
@@ -15,6 +17,49 @@
       </div>
     </div>
 </div>
+<input  id="mynamedb" hidden="true" value=''>
+<!-- document.getElementById("mynamedb").value -->
+<script>
+  $(function() {
+    var availableTags = [
+      "Singapore Safety Driving Centre (SSDC)",
+      "About",
+      "Privacy Policy",
+      "Contact US",
+      "Bukit Batok Driving Centre (BBDC)",
+      "Tampines Mall",
+      "Temasek Polytechnic",
+      "Jurong Point Prayer Room Not For Public",
+      "IKEA Tampines",
+      "Changi Airport Cargo Complex",
+      "Changi Airport Terminal 1",
+      "Changi Airport Terminal 2",
+      "Changi Airport Terminal 3",
+      "Changi General Hospital",
+      "Darul Arqam Singapore",
+      "Downtown East",
+      "Guthrie Building",
+      "Lagun Sari",
+      "Singapore Institute of Management (SIM)",
+      "National University Hospital (NUH)",
+      "ComfortDelGro Driving Centre",
+      "Bukit Batok Driving Centre (BBDC)",
+      "German Centre",
+      "Ghim Moh Road",
+      "IMM Building",
+      "Institute of Public Administration and Management (IPAM) @ Civil Service College",
+      "Suntec City/ Millenia Walk Basement",
+      "Marina Square",
+      "Royal Plaza",
+      "Furama Hotel (River Front)",
+      "Singapore General Hospital (SGH) Mosque"
+    ];
+    console.log(availableTags);
+    $( "#name" ).autocomplete({
+      source: availableTags
+    });
+  });
+  </script>
 
 <div class="container">
     <section class="section">
@@ -27,7 +72,7 @@
         <% else %>
           <img src="<%= firstB.photos.first.photo_url %>" width="234" height="232" alt="image descraption"> 
         <% end %>
-        <p><%= firstB.name %></p>
+        <p><%= link_to firstB.name , version_path(firstB) , method: :get  , class: 'a-tag-text'%></p>
       <% else %>
         <img src="images/img04.jpg" width="234" height="232" alt="image descraption"> 
         <p>Prayer area</p>
@@ -41,7 +86,7 @@
         <% else %>
           <img src="<%= firstB.photos.first.photo_url %>" width="234" height="232" alt="image descraption"> 
         <% end %>
-        <p><%= firstB.name %></p>
+        <p><%= link_to firstB.name , version_path(firstB) , method: :get  , class: 'a-tag-text'%></p>
       <% else %>
         <img src="images/img03.jpg" width="234" height="232" alt="image descraption">
         <p>Prayer area</p>  
@@ -55,7 +100,7 @@
         <% else %>
           <img src="<%= firstB.photos.first.photo_url %>" width="234" height="232" alt="image descraption"> 
         <% end %>
-        <p><%= firstB.name %></p>
+        <p><%= link_to firstB.name , version_path(firstB) , method: :get  , class: 'a-tag-text'%></p>
       <% else %>
         <img src="images/img02.jpg" width="234" height="232" alt="image descraption"> 
         <p>Prayer area</p>   
@@ -69,7 +114,7 @@
         <% else %>
           <img src="<%= firstB.photos.first.photo_url %>" width="234" height="232" alt="image descraption"> 
         <% end %>
-        <p><%= firstB.name %></p>
+        <p><%= link_to firstB.name , version_path(firstB) , method: :get  , class: 'a-tag-text'%></p>
       <% else %>
         <img src="images/img05.jpg" width="234" height="232" alt="image descraption">  
         <p>Prayer area</p>  
@@ -106,7 +151,7 @@
         </div>
         <div class="col-md-8 col-sm-6 col-xs-12">
           <div class="item-detail">
-            <h1><%= version.name %></h1>
+            <h1><%= link_to version.name , version_path(version) , method: :get  , class: 'a-tag-text-decoration' %></h1>
             <h2><strong>Location Adderss:</strong> <%= version.street %>, level <%= version.floor %></h2>
             <p><%= strip_tags(version.description) %></p>
             <span class="checkin">Check In<span class="dotes">:</span><span><%= version.room.checkins.count %></span></span>

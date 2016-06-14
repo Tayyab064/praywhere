@@ -12,10 +12,10 @@ data = JSON.parse(file)
 counti = 0
 
 data.each do |my_d|
-	if my_d['post_type'].present?
+	if my_d['post_content'] != ""
 		room = Room.create(user_id: 1)
 		post_content = ActionController::Base.helpers.strip_tags(my_d['post_content'])
-		version = Version.create(name: my_d['post_title'], street: "", floor: "", city: "Singapore", country: "Singapore", description: post_content , direction: "Please refer to the description", room_id: room.id, status: 1, typ: 0 )
+		version = Version.create(name: my_d['post_title'], street: "", floor: "", city: "", country: "", description: post_content , direction: "Please refer to the description", room_id: room.id, status: 1, typ: 0 )
 		regex_an = "<a\shref=[^>]*[>]"
 		regex_hre = 'http[^"]*'
 		mat = my_d['post_content'].scan(/<a\shref=[^>]*[>]/)
@@ -31,27 +31,29 @@ data.each do |my_d|
 
 		counti += 1
 		data.each do |second_lop|
-			if second_lop['post_parent'] == my_d['ID']
-				post_contenti = ActionController::Base.helpers.strip_tags(second_lop['post_content'])
-				versioni = Version.create(name: second_lop['post_title'], street: "", floor: "", city: "Singapore", country: "Singapore", description: post_contenti , direction: "Please refer to the description", room_id: room.id, status: 1, typ: 1 )
-				
-				mat_s = second_lop['post_content'].scan(/<a\shref=[^>]*[>]/)
-				if mat_s.count < 1
-					photoo = Photo.create(photo_url: second_lop['guid'] , cloud: false , version_id: versioni.id)
-				else
-					mat_s.each do |imk|
-						mas = imk.match(regex_hre)
-						photoo = Photo.create(photo_url: mas , cloud: false , version_id: versioni.id)		
+			if second_lop['post_content'] != ""
+				if second_lop['post_parent'] == my_d['ID']
+					post_contenti = ActionController::Base.helpers.strip_tags(second_lop['post_content'])
+					versioni = Version.create(name: second_lop['post_title'], street: "", floor: "", city: "", country: "", description: post_contenti , direction: "Please refer to the description", room_id: room.id, status: 1, typ: 1 )
+					
+					mat_s = second_lop['post_content'].scan(/<a\shref=[^>]*[>]/)
+					if mat_s.count < 1
+						photoo = Photo.create(photo_url: second_lop['guid'] , cloud: false , version_id: versioni.id)
+					else
+						mat_s.each do |imk|
+							mas = imk.match(regex_hre)
+							photoo = Photo.create(photo_url: mas , cloud: false , version_id: versioni.id)		
+						end
+						p "Bingoo"
 					end
-					p "Bingoo"
+					#photoo = Photo.create(photo_url: second_lop['guid'] , cloud: false , version_id: versioni.id)
+					counti += 1
+
+					descri = second_lop['post_content'].gsub(regex_an,"")
+					descri = second_lop['post_content'].gsub(regex_hre,"")
+
+					versioni.update(description: descri)
 				end
-				#photoo = Photo.create(photo_url: second_lop['guid'] , cloud: false , version_id: versioni.id)
-				counti += 1
-
-				descri = second_lop['post_content'].gsub(regex_an,"")
-				descri = second_lop['post_content'].gsub(regex_hre,"")
-
-				versioni.update(description: descri)
 			end
 		end
 

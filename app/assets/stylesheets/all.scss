@@ -977,3 +977,29 @@ ul.nav-tabs li a:hover {
     overflow: hidden;
     text-overflow: ellipsis;
  }
+
+.a-tag-text{
+	color: #fff;
+    text-decoration: none;
+}
+
+a.a-tag-text:hover {
+	color: #fff;
+    text-decoration: none;
+}
+
+.a-tag-text-decoration{
+    text-decoration: none;
+}
+
+a.a-tag-text-decoration:hover {
+    text-decoration: none;
+    color: #f08f00;
+}
+
+
+.or-line-sign{
+	text-align: center;
+	font-size: medium;
+	margin: inherit;
+}

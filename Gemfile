@@ -28,7 +28,7 @@ gem 'cloudinary'
 gem 'devise'
 gem 'will_paginate', '~> 3.1.0'
 gem 'yaml_db'
-
+#gem 'rails3-jquery-autocomplete'
 
 gem 'omniauth'
 gem 'omniauth-facebook'
