@@ -1003,3 +1003,32 @@ a.a-tag-text-decoration:hover {
 	font-size: medium;
 	margin: inherit;
 }
+
+/**
+* Dropdown
+*
+*/
+.ui-autocomplete{
+    top: 437px;
+    left: 834px;
+    width: 370px;
+    background-color: #e9f5fb;
+    padding: 0;
+}
+
+.ui-menu-item{
+	display: block;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	background-color: #e9f5fb;
+    text-decoration: none;
+    padding: 8px;
+}
+
+.ui-state-focus{
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	background-color: #ffffff;
+}
+
+.ui-menu .ui-menu-item{
+	padding: 0;
+}
