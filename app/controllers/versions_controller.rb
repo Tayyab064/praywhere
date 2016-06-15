@@ -28,7 +28,7 @@ class VersionsController < ApplicationController
       redirect_to admin_room_entries_path if current_user.role == 'admin'
     end
     
-    @versions = Version.approved.orignal.paginate(:page => params[:page], :per_page => 4)
+    @versions = Version.approved.orignal.paginate(:page => params[:page], :per_page => 30)
 
     p params
     @scrol = 'no'
