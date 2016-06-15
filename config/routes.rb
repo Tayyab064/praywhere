@@ -35,6 +35,8 @@ Rails.application.routes.draw do
   get 'privacy_policy' => 'contact#privacy_policy'
   get 'terms_conditions' => 'contact#terms_cond'
   post 'message' => 'contact#message'
+
+  get 'version/name' => 'versions#nam'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

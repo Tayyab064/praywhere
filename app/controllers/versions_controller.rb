@@ -1,9 +1,28 @@
 class VersionsController < ApplicationController
   before_action :set_version, only: [:show, :edit, :update ,:creport , :voteup]
-  before_action :authenticate_user!, except: [:index , :show]
+  before_action :authenticate_user!, except: [:index , :show , :nam]
 
   # GET /versions
   # GET /versions.json
+  def nam
+    h = Array.new
+    count = 0
+    chk = false
+    Room.all.each do |roo|
+      chk = false
+      h.each do |ar|
+        if ar == roo.versions.first.name
+          chk = true
+        end
+      end
+      if chk == false
+        h.push(roo.versions.first.name)
+      end
+      count += 1
+    end
+    render json: h , status: :ok
+  end
+
   def index
     if user_signed_in?
       redirect_to admin_room_entries_path if current_user.role == 'admin'
