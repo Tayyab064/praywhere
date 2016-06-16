@@ -5,7 +5,7 @@
 
 <div class="header-main"> 
     <div class="container">
-      <div class="search-box"> <span>Finding A</span> <strong>Prayer Place</strong> <span>Made Simple</span>
+      <div class="search-box"> <span>Finding A</span> <strong style="font-size: 32px;">Prayer Place</strong> <span>Made Simple</span>
       <form action="<%= versions_path %>" method="get">
         <div class="form-row clearfix">
           <input type="text" class="form-control" id="name" name="name" placeholder="Enter your building name or street name">
@@ -207,21 +207,23 @@
 <div class="container">
     <section class="section">
     <div class="row">
-    <div class="img-box col-md-3 col-sm-6 col-xs-6"> 
-      <% if Version.better.decending.first.present? %>
-        <% firstB = Version.better.decending.first %>
-        <% if firstB.photos.first.cloud %>
-          <img src="<%= firstB.photos.first.image_url %>" width="234" height="232" alt="image descraption"> 
-        <% else %>
-          <img src="<%= firstB.photos.first.photo_url %>" width="234" height="232" alt="image descraption"> 
-        <% end %>
-        <p><%= link_to firstB.name , version_path(firstB) , method: :get  , class: 'a-tag-text'%></p>
-      <% else %>
-        <img src="images/img04.jpg" width="234" height="232" alt="image descraption"> 
-        <p>Prayer area</p>
-      <% end %>                   
-    </div>
-    <div class="img-box col-md-3 col-sm-6 col-xs-6"> 
+    <% count = 0 %>
+    <% Version.better.decending.each do |fversion| %>
+      <% if count < 4 %>
+      <% if fversion.photos.first.image_url.present? || fversion.photos.first.photo_url.match('.jpg') %>
+        <% count += 1 %>
+        <div class="img-box col-md-3 col-sm-6 col-xs-6"> 
+            <% if fversion.photos.first.cloud %>
+              <img src="<%= fversion.photos.first.image_url %>" width="234" height="232" alt="image descraption"> 
+            <% else %>
+              <img src="<%= fversion.photos.first.photo_url %>" width="234" height="232" alt="image descraption"> 
+            <% end %>
+            <p><%= link_to fversion.name , version_path(fversion) , method: :get  , class: 'a-tag-text'%></p>
+        </div>
+      <% end %>
+      <% end %>
+    <% end %>
+    <!-- <div class="img-box col-md-3 col-sm-6 col-xs-6"> 
       <% if Version.better.decending.second.present? %>
         <% firstB = Version.better.decending.second %>
         <% if firstB.photos.first.cloud %>
@@ -262,7 +264,7 @@
         <img src="images/img05.jpg" width="234" height="232" alt="image descraption">  
         <p>Prayer area</p>  
       <% end %>          
-    </div>
+    </div> -->
     </div>
     </section>
     <% if @scrol == 'yes' %>
@@ -296,7 +298,7 @@
         <div class="col-md-8 col-sm-6 col-xs-12">
           <div class="item-detail">
             <h1><%= link_to version.name , version_path(version) , method: :get  , class: 'a-tag-text-decoration' %></h1>
-            <h2><strong>Location Adderss:</strong> <%= version.street %>, level <%= version.floor %></h2>
+            <h2><strong>Location Adderss:</strong> <%= version.street.present? ? version.street : "Refer to description" %> <%= version.floor.present? ? ", level #{version.floor}" : "" %></h2>
             <p><%= strip_tags(version.description) %></p>
             <span class="checkin">Check In<span class="dotes">:</span><span><%= version.room.checkins.count %></span></span>
             <span class="post">Date Posted<span class="dotes">:</span><span><%= version.created_at.strftime("%d-%m-%Y") %></span></span> 

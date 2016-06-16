@@ -90,7 +90,32 @@
           <span class="footer_links_pray"><%= link_to 'About us', contact_path %></span> 
         </div>
         <div class="col-md-5 col-sm-8 col-xs-8">
-          <div class="list-group-item">
+          <% count = 0 %>
+
+            <% Room.decending.each do |fversion| %>
+              <% if count < 2 %>
+              <% if fversion.versions.last.photos.first.image_url.present? || fversion.versions.last.photos.first.photo_url.match('.jpg') %>
+                <div class="list-group-item">
+                  <span><%= count==0 ? "recent post" : "" %></span>
+                  <% count += 1 %>
+                      <div class="photo">  
+                        <% if fversion.versions.last.photos.first.cloud %>
+                          <img src="<%= fversion.versions.last.photos.first.image_url %>" width="91" height="79" alt="image descraption">
+                        <% else %>
+                          <img src="<%= fversion.versions.last.photos.first.photo_url %>" width="91" height="79" alt="image descraption">
+                        <% end %>
+                      </div>
+                      <div class="item-list">
+                        <h3 style="overflow: hidden" class="text-flow-name"><%= fversion.versions.last.name %></h3>
+                        <p>Location Address: <%= fversion.versions.last.street%>, Level <%= fversion.versions.last.floor%></p>
+                      </div>
+                </div>
+              <% end %>
+              <% end %>
+            <% end %>
+
+
+          <!-- <div class="list-group-item">
             <span>recent post</span>
             <% if Room.last.present? %>
 	            <% if Room.last.versions.first.present? %>
@@ -109,6 +134,7 @@
 	            <% end %>
 	        <% end %>
           </div>
+
           <div class="list-group-item">
           <% if Room.decending.third.present? %>
           	<% if Room.decending.third.versions.first.present? %>
@@ -126,10 +152,36 @@
 	            </div>
 	        <% end %>
 	      <% end %>
-          </div>
+          </div> -->
+
         </div>
+
         <div class="col-md-5 col-sm-8 hidden-sm col-xs-6 hidden-xs">
-          <div class="list-group-item">
+
+          <% count = 0 %>
+            <% Version.better.decending.each do |fversion| %>
+              <% if count < 2 %>
+              <% if fversion.photos.first.image_url.present? || fversion.photos.first.photo_url.match('.jpg') %>
+                <div class="list-group-item">
+                  <% count += 1 %>
+                      <% @roomL = fversion %>
+                      <div class="photo">  
+                        <% if @roomL.photos.first.cloud %>
+                          <img src="<%= @roomL.photos.first.image_url %>" width="91" height="79" alt="image descraption">
+                        <% else %>
+                          <img src="<%= @roomL.photos.first.photo_url %>" width="91" height="79" alt="image descraption">
+                        <% end %>
+                      </div>
+                      <div class="item-list">
+                        <h3 style="overflow: hidden" class="text-flow-name"><%= @roomL.name %></h3>
+                        <p>Location Address: <%= @roomL.street%>, Level <%= @roomL.floor%></p>
+                      </div>
+                </div>
+              <% end %>
+              <% end %>
+            <% end %>
+
+          <!-- <div class="list-group-item">
           <% if Room.decending.second.present? %>
           	<% if Room.decending.second.versions.first.present? %>
             	<% @roomL = Room.decending.second.versions.first %>
@@ -164,7 +216,7 @@
 	            </div>
 	        <% end %>
 	      <% end %>
-          </div>
+          </div> -->
         </div>
       </div>
       </footer>
