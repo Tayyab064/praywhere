@@ -18,7 +18,7 @@ data.each do |my_d|
 		else
 			room = Room.create(user_id: 1)
 			post_content = ActionController::Base.helpers.strip_tags(my_d['post_content'])
-			version = Version.create(name: my_d['post_title'], street: "", floor: "", city: "", country: "", description: post_content , direction: "Please refer to the description", room_id: room.id, status: 1, typ: 0 )
+			version = Version.create(name: my_d['post_title'], street: "", floor: "", city: "", country: "", description: post_content , direction: "Please refer to the description", created_at: my_d['post_date'] , room_id: room.id, status: 1, typ: 0 )
 			regex_an = "<a\shref=[^>]*[>]"
 			regex_hre = 'http[^"]*'
 			mat = my_d['post_content'].scan(/<a\shref=[^>]*[>]/)
@@ -38,7 +38,7 @@ data.each do |my_d|
 					if second_lop['post_content'] != "" && second_lop['post_title'] != "About" && second_lop['post_type'] != "page"
 						if second_lop['post_parent'] == my_d['ID']
 							post_contenti = ActionController::Base.helpers.strip_tags(second_lop['post_content'])
-							versioni = Version.create(name: second_lop['post_title'], street: "", floor: "", city: "", country: "", description: post_contenti , direction: "Please refer to the description", room_id: room.id, status: 1, typ: 1 )
+							versioni = Version.create(name: second_lop['post_title'], street: "", floor: "", city: "", country: "", description: post_contenti , direction: "Please refer to the description", created_at: second_lop['post_date'] , room_id: room.id, status: 1, typ: 1 )
 							
 							mat_s = second_lop['post_content'].scan(/<a\shref=[^>]*[>]/)
 							if mat_s.count < 1
