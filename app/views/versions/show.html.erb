@@ -166,12 +166,12 @@ vote this up to replace the other one</p>
                         <h4 style="color: #009ce2">Prayer area no longer exists? <strong style="color: #f29100">Help Us</strong> update this entry</h4>
                         <%= form_tag( action: "creport") do%>
                           <%= radio_button_tag(:status, "0") %>
-                          <%= label_tag(:status_child, "Prayer room no longer exist") %><br>
+                          <%= label_tag(:status_child, " Prayer room no longer exist" ,class: "lovely-radio") %><br>
                           <%= radio_button_tag(:status, "1") %>
-                          <%= label_tag(:status_adult, "Prayer room under renovation") %><br>
+                          <%= label_tag(:status_adult, " Prayer room under renovation",class: "lovely-radio") %><br>
                           <%= radio_button_tag(:status, "2") %>
-                          <%= label_tag(:status_adult, "Inappropiate content") %><br>
-                          <%= submit_tag "Report" , :class => "youtube" %>
+                          <%= label_tag(:status_adult, " Inappropiate content",class: "lovely-radio") %><br>
+                          <%= submit_tag "SUBMIT" , :class => "youtube" %>
                         <% end %>
                       </div>
                     </div>

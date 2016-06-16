@@ -1032,3 +1032,37 @@ a.a-tag-text-decoration:hover {
 .ui-menu .ui-menu-item{
 	padding: 0;
 }
+
+
+input[type='radio']:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: white;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 1px solid #009ce2;
+}
+
+input[type='radio']:checked:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: #009ce2;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 1px solid #009ce2;
+}
+.lovely-radio{
+    font-size: initial;
+    font-weight: inherit;
+ }
+

@@ -12,7 +12,7 @@
         </div>
         <div class="form-row clearfix">
           <input type="text" class="form-control city" id="city" name="city" placeholder="Enter City">
-          <input type="text" class="form-control country" id="country" name="country" placeholder="Enter Country">
+          <input type="text" class="form-control country" value="" id="country" name="country" placeholder="Enter Country">
           <input type="submit" class="form-submit" id="" value="">
         </div>
       </form>
@@ -20,6 +20,23 @@
     </div>
 </div>
 <!-- <input  id="mynamedb" hidden="true" value=''> -->
+<script type="text/javascript">
+var requestUrl = "http://ip-api.com/json";
+
+$.ajax({
+  url: requestUrl,
+  type: 'GET',
+  success: function(json)
+  {
+    document.getElementById("country").value = json.country;
+    console.log("My country is: " + json.country);
+  },
+  error: function(err)
+  {
+    console.log("Request failed, error= " + err);
+  }
+});
+</script>
 <!-- document.getElementById("mynamedb").value -->
 <script>
   $(function() {
