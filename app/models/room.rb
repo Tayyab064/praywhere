@@ -4,4 +4,5 @@ class Room < ActiveRecord::Base
 	has_many :checkins , dependent: :destroy
 
 	scope :decending , lambda{ order(created_at: :desc)}
+	scope :ascending , lambda{ order(created_at: :asc)}
 end

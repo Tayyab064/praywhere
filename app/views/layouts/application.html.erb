@@ -156,15 +156,16 @@
 
         </div>
 
-        <div class="col-md-5 col-sm-8 hidden-sm col-xs-6 hidden-xs">
+        <div class="col-md-5 col-sm-8 hidden-sm col-xs-6 hidden-xs" style="padding: 17px 0 0;">
 
           <% count = 0 %>
-            <% Version.better.decending.each do |fversion| %>
+            <% Room.ascending.each do |fversion| %>
               <% if count < 2 %>
-              <% if fversion.photos.first.image_url.present? || fversion.photos.first.photo_url.match('.jpg') %>
+              <% if fversion.versions.first.photos.first.image_url.present? || fversion.versions.first.photos.first.photo_url.match('.jpg') %>
                 <div class="list-group-item">
+                <span><%= count==0 ? "" : "" %></span>
                   <% count += 1 %>
-                      <% @roomL = fversion %>
+                      <% @roomL = fversion.versions.first %>
                       <div class="photo">  
                         <% if @roomL.photos.first.cloud %>
                           <img src="<%= @roomL.photos.first.image_url %>" width="91" height="79" alt="image descraption">

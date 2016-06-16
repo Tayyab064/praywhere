@@ -69,7 +69,7 @@
                     <div class="bookmark">
                       <a href="#">bookmark</a>
                     </div>
-                      <h2><strong>Location Address:</strong><%= @version.street %> <%= @version.city %>, <%= @version.country %></h2>
+                      <h2><strong>Location Address:</strong><%= @version.street=="" ? "" : @version.street  %> <%= @version.city=="" ? "" : @version.city %> <%= @version.country=="" ? "Singapore" : @version.country %></h2>
                         <p><%= @version.name %>, level <%= @version.floor %> at <%= @version.name %> (<%= @version.direction %>)<br><%= strip_tags(@version.description) %>
                         </p>
                         <span class="checkin">Check In<span class="dotes">: </span><span><%= @version.room.checkins.count %></span></span>
