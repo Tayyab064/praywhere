@@ -140,7 +140,11 @@
                                         
                                         <%= f.file_field :photo_attributes, :id => "uploadBtn" , :class => "upload" , name: "photo[image][0]" %>
                                         <% if  @version.photos.first.present? %>
-                                          <%= image_tag(@version.photos.first.image_url , class: "show_image_page") %>
+                                          <% if @version.photos.first.cloud == false  %>
+                                            <%= image_tag(@version.photos.first.photo_url , class: "show_image_page") %>
+                                          <% else %>
+                                            <%= image_tag(@version.photos.first.image_url , class: "show_image_page") %>
+                                          <% end %>
                                         <% else %>
                                           <span class="button">Choose a Photo</span>
                                         <% end %>
@@ -149,7 +153,11 @@
                                     <span class="file-wrapper">
                                       <%= f.file_field :photo_attributes, :id => "uploadBtn" , :class => "upload" , name: "photo[image][1]" %>
                                       <% if  @version.photos.second.present? %>
-                                        <%= image_tag(@version.photos.second.image_url , class: "show_image_page") %>
+                                        <% if @version.photos.second.cloud == false  %>
+                                            <%= image_tag(@version.photos.second.photo_url , class: "show_image_page") %>
+                                          <% else %>
+                                            <%= image_tag(@version.photos.second.image_url , class: "show_image_page") %>
+                                          <% end %>
                                       <% else %>
                                         <span class="button">Choose a Photo</span>
                                       <% end %>
@@ -157,7 +165,11 @@
                                     <span class="file-wrapper">
                                     <%= f.file_field :photo_attributes, :id => "uploadBtn" , :class => "upload" , name: "photo[image][2]" %>
                                     <% if  @version.photos.third.present? %>
-                                      <%= image_tag(@version.photos.third.image_url , class: "show_image_page") %>
+                                      <% if @version.photos.third.cloud == false  %>
+                                            <%= image_tag(@version.photos.third.photo_url , class: "show_image_page") %>
+                                          <% else %>
+                                            <%= image_tag(@version.photos.third.image_url , class: "show_image_page") %>
+                                          <% end %>
                                     <% else %>
                                       <span class="button">Choose a Photo</span>
                                     <% end %>
@@ -165,7 +177,11 @@
                                     <span class="file-wrapper">
                                     <%= f.file_field :photo_attributes, :id => "uploadBtn" , :class => "upload" , name: "photo[image][3]" %>
                                     <% if  @version.photos.fourth.present? %>
-                                      <%= image_tag(@version.photos.fourth.image_url , class: "show_image_page") %>
+                                      <% if @version.photos.fourth.cloud == false %>
+                                            <%= image_tag(@version.photos.fourth.photo_url , class: "show_image_page") %>
+                                          <% else %>
+                                            <%= image_tag(@version.photos.fourth.image_url , class: "show_image_page") %>
+                                          <% end %>
                                     <% else %>
                                       <span class="button">Choose a Photo</span>
                                     <% end %>
