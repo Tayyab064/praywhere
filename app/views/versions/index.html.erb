@@ -42,8 +42,8 @@ $.ajax({
   $(function() {
        
     var availableTags = [
-  "Singapore Safety Driving Centre (SSDC)",
-  "Bukit Batok Driving Centre (BBDC)",
+  "Singapore Safety Driving Centre",
+  "SSDC",
   "Tampines Mall",
   "Temasek Polytechnic",
   "IKEA Tampines",
@@ -117,12 +117,13 @@ $.ajax({
   "Grandlink Square",
   "prayer room grandlink",
   "chill by the river cafe",
+  "Bukit Batok Driving Centre",
   "North Point Mall",
   "Kaplan Pomo Centre",
   "Fairmont Hotel",
   "UE Bizhub East",
-  "Universal Studios Singapore (USS)",
-  "Tan Tock Seng Hospital (TTSH)",
+  "Universal Studios Singapore ( USS )",
+  "Tan Tock Seng Hospital ( TTSH )",
   "Jurong Point",
   "Bulkhaul House",
   "The Star Vista",
@@ -211,7 +212,7 @@ $.ajax({
   "Invest",
   "NEX",
   "Bukit Panjang Plaza",
-  "Singapore University of Technology and Design (SUTD)" ];
+  "Singapore University of Technology and Design ( SUTD )" ];
 
     console.log(availableTags);
     $( "#name" ).autocomplete({
@@ -234,7 +235,7 @@ $.ajax({
             <% else %>
               <img src="<%= fversion.photos.first.photo_url %>" width="234" height="232" alt="image descraption"> 
             <% end %>
-            <p><%= link_to fversion.name , version_path(fversion) , method: :get  , class: 'a-tag-text'%></p>
+            <p><%= link_to truncate(fversion.name, :length => 30) , version_path(fversion) , method: :get  , class: 'a-tag-text ' %></p>
         </div>
       <% end %>
       <% end %>
@@ -284,7 +285,7 @@ $.ajax({
     </div>
     </section>
     <% if @scrol == 'yes' %>
-      <% if @versions.count >= 1 &&  ( @versions.first.photos.first.image_url.present? || @versions.first.photos.first.photo_url.match('.jpg') ) %>
+      <% if @versions.count > 0 &&  ( @versions.first.photos.first.image_url.present? || @versions.first.photos.first.photo_url.match('.jpg') ) %>
         <div id="result" class="has-success">
           <p><span class="glyphicon glyphicon-search" style="font-size:28px; color:#fff; margin-right: 10px"></span> Displaying your search about: <%= @para %>.</p>
         </div>

@@ -971,6 +971,13 @@ ul.nav-tabs li a:hover {
  * text overflow
  */
 
+ .text-flow-name-box {
+ 	white-space: nowrap;
+    width: 8em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+ }
+
  .text-flow-name {
  	white-space: nowrap;
     width: 12em;
