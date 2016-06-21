@@ -285,7 +285,7 @@ $.ajax({
     </div>
     </section>
     <% if @scrol == 'yes' %>
-      <% if @versions.count > 0 &&  ( @versions.first.photos.first.image_url.present? || @versions.first.photos.first.photo_url.match('.jpg') ) %>
+      <% if @versions.count > 0 &&  ( @versions.last.photos.first.image_url.present? || @versions.last.photos.first.photo_url.match('.jpg') || @versions.first.photos.first.image_url.present? || @versions.first.photos.first.photo_url.match('.jpg') ) %>
         <div id="result" class="has-success">
           <p><span class="glyphicon glyphicon-search" style="font-size:28px; color:#fff; margin-right: 10px"></span> Displaying your search about: <%= @para %>.</p>
         </div>

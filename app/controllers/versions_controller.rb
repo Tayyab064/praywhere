@@ -48,6 +48,7 @@ class VersionsController < ApplicationController
       @versions = @versions.where("city ~* ?" , params[:city]) if params[:city]!=""
       @versions = @versions.where("country ~* ?" , params[:country]) if params[:country]!=""
     end
+    p @versions.count
     p @scrol
   end
 
